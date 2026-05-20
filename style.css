@@ -1,100 +1,199 @@
+body{
 
-        .banner{
-            position:absolute;
+    margin:0;
+
+    overflow:hidden;
+}
+.banner{
+    position:absolute;
     inset:0;
 
-    background:
-
-    url('./Imagens/cenario1.jpg');
+    background:url('./Imagens/cenario1.jpg');
 
     background-size:cover;
     background-position:center;
 
     z-index:-1;
-        }
-    .ListaCavalos{
-        width: 80%;
-        margin: auto;
-        text-align: center;
-        color: rgb(88, 54, 31);
-    }
-    .ListaCavalos p{
+}
 
-    color: pink;
+/* CONTAINER PRINCIPAL */
+.ListaCavalos{
 
-    }
-    .ListaCavalos h1{
-        font-size:70px;
+    width:80%;
+    margin:auto;
+
+    text-align:center;
+
+    color:rgb(88, 54, 31);
+}
+
+
+.ListaCavalos h1{
+
+    font-size:70px;
     font-weight:800;
     letter-spacing:2px;
-    }
-    .ListaCavalos p{
-            font-size:30px;
+}
+
+
+.ListaCavalos p{
+
+    font-size:30px;
     font-weight:800;
     letter-spacing:2px;
-    color: black;
-    }
 
-    .opcoesCavalo{
-        display: flex;
-        justify-content: center;
-        gap: 25px; /* espaço entre as imagens */
-        flex-wrap: wrap;
-        margin-top: 40px;
-    }
+    color:black;
+}
 
-    .opcoesCavalo img{
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
+/* LISTA DOS CAVALOS */
+.opcoesCavalo{
 
-        border-radius: 50%;
-        cursor: pointer;
+    display:flex;
+    justify-content:center;
 
-        border: 4px solid;
-        border-color: black;
+    gap:25px;
 
-        transition: 0.3s;
-    }
+    flex-wrap:wrap;
 
-    .opcoesCavalo img:hover{
-        transform: scale(1.08);
-    }
+    margin-top:40px;
+}
 
-    /* imagem selecionada */
-    .opcoesCavalo img.selecionado{
-        border: 4px solid #ffd700;
-        transform: scale(1.1);
-    }
-    button{
-        width:100%;
+/* IMAGENS */
+.opcoesCavalo img{
+
+    width:120px;
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    border:4px solid black;
+
+    transition:0.3s;
+}
+
+
+.opcoesCavalo img:hover{
+
+    transform:scale(1.08);
+}
+
+/* SELECIONADO */
+.opcoesCavalo img.selecionado{
+
+    border:4px solid #ffd700;
+
+    transform:scale(1.1);
+}
+
+/* DIV BOTÃO */
+.bot{
+
+    display:flex;
+    justify-content:center;
+
+    margin-top:40px;
+}
+
+/* BOTÃO */
+button{
+
     padding:15px;
+
+    min-height:30px;
+    max-width:120px;
+    width:100%;
+
     border:none;
     border-radius:14px;
+
     background:#fff;
     color:#000;
+
     font-size:16px;
     font-weight:800;
+
     cursor:pointer;
+
     transition:0.3s;
-    }
-    .bot{
-            display: flex;
-        justify-content: center;
-        gap: 25px; /* espaço entre as imagens */
-        flex-wrap: wrap;
-        margin-top: 40px;
-    }
-    button:hover{
+}
+
+/* HOVER BOTÃO */
+button:hover{
+
     background:#cfcfcf;
-    }
-    #apostar{
+}
 
-    position: absolute;
-    justify-content: center;
-    top:60%;
-    padding: 15px;
-    min-height: 30px;
-    max-width: 120px;;
+/* RESULTADO FINAL */
+.voltar{
 
-    }
+    padding:15px;
+
+    min-height:30px;
+    max-width:120px;
+    width:100%;
+
+    border:none;
+    border-radius:14px;
+
+    background:#000000;
+    color:#ffffff;
+
+    font-size:16px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+/* HOVER BOTÃO */
+.voltar:hover{
+
+    background:#5900ff;
+}
+
+/* RESULTADO FINAL */
+#msg{
+
+    display:none;
+
+    width:500px;
+
+    margin:80px auto;
+
+    padding:30px;
+
+    border:5px solid black;
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.92);
+
+    text-align:center;
+
+    font-size:22px;
+    font-weight:700;
+
+    color:black;
+
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+/* TITULO RESULTADO */
+#msg h1{
+
+    margin-bottom:20px;
+
+    font-size:40px;
+}
+
+/* LINHA */
+#msg hr{
+
+    margin:20px 0;
+
+    border:1px solid #555555;
+}

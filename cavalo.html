@@ -1,51 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Turfe Amigo</title>
-<link rel="stylesheet" href="style.css">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turfe Amigo</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
-<div class="banner">
-<div class="ListaCavalos">
 
-    <h1>Turfe Amigo</h1>  
 
-    <p>Aposte em uma Little Pony</p>
+    <div class="banner"></div>
 
-    <div class="opcoesCavalo">
 
-        <img src="./Imagens/pony1.png" onclick="selecionarFoto(this)">
-        <img src="./Imagens/pony2.png" onclick="selecionarFoto(this)">
-        <img src="./Imagens/pony3.png" onclick="selecionarFoto(this)">
-        <img src="./Imagens/pony6.png" onclick="selecionarFoto(this)">
-        <img src="./Imagens/pony5.png" onclick="selecionarFoto(this)">
+    <div class="ListaCavalos">
+
+        <h1>Turfe Amigo</h1>
+
+        <p>Aposte em uma Little Pony</p>
+
+        <div class="opcoesCavalo">
+
+            <img src="./Imagens/pony1.png" onclick="selecionarFoto(this, 'Cavalo 1')">
+
+            <img src="./Imagens/pony2.png" onclick="selecionarFoto(this, 'Cavalo 2')">
+
+            <img src="./Imagens/pony3.png" onclick="selecionarFoto(this, 'Cavalo 3')">
+
+            <img src="./Imagens/pony6.png" onclick="selecionarFoto(this, 'Cavalo 4')">
+
+            <img src="./Imagens/pony5.png" onclick="selecionarFoto(this, 'Cavalo 5')">
+
+        </div>
+
+        <div class="bot">
+
+            <button id="apostar" onclick="apostar()">
+                Apostar
+            </button>
+
+        </div>
+
     </div>
- <div class="bot">
-    <button id="apostar" class="button" onclick="apostar()">Apostar</button>
- </div>
-</div>
-</div>
-<div id="msg"></div>
+
+
+    
+    <div id="msg"></div>
+
 </body>
+
 </html>
 <script>
 
+let poneiEscolhido = "";
 
-function selecionarFoto(imgEscolhida){
+function selecionarFoto(imgEscolhida, ponei){
+    poneiEscolhido = ponei;
 
-    // remove seleção de todas
     let fotos = document.querySelectorAll(".opcoesCavalo img");
 
     fotos.forEach(foto => {
         foto.classList.remove("selecionado");
     });
 
-    // adiciona na clicada
+
     imgEscolhida.classList.add("selecionado");
 }
 
@@ -57,36 +80,98 @@ function selecionarFoto(imgEscolhida){
 
 function apostar(){
 
-    let cavalo1 = (Math.random() * (9 - 7) + 7).toFixed(1);
-    let cavalo2 = (Math.random() * (9 - 7) + 7).toFixed(1);
-    let cavalo3 = (Math.random() * (9 - 7) + 7).toFixed(1);
-    let cavalo4 = (Math.random() * (9 - 7) + 7).toFixed(1);
-    let cavalo5 = (Math.random() * (9 - 7) + 7).toFixed(1);
+    let soma1 = 0;
+    let soma2 = 0;
+    let soma3 = 0;
+    let soma4 = 0;
+    let soma5 = 0;
 
-    vt_cavalo1.push(cavalo1);
-    vt_cavalo2.push(cavalo2);
-    vt_cavalo3.push(cavalo3);
-    vt_cavalo4.push(cavalo4);
-    vt_cavalo5.push(cavalo5);
+    for(let i = 1; i <= 7; i++){
 
-    if (vt_cavalo1.length < 7){
-
-        for (let i = 0; i < vt_cavalo1.length; i++){
-
-            let soma = 0;
-
-            soma += vt_cavalo1[i];
-
-        }
-
-        msg.innerHTML += `Cavalo 1: ${cavalo1} - ${soma}`;
-
-    } else {
-        alert('São no máximo 7 voltas');
+        soma1 += Number((Math.random() * 2 + 7).toFixed(1));
+        soma2 += Number((Math.random() * 2 + 7).toFixed(1));
+        soma3 += Number((Math.random() * 2 + 7).toFixed(1));
+        soma4 += Number((Math.random() * 2 + 7).toFixed(1));
+        soma5 += Number((Math.random() * 2 + 7).toFixed(1));
 
     }
+
+    let vencedor = "Cavalo 1";
+    let maior = soma1;
+
+    if(soma2 > maior){
+        maior = soma2;
+        vencedor = "Cavalo 2";
+    }
+
+    if(soma3 > maior){
+        maior = soma3;
+        vencedor = "Cavalo 3";
+    }
+
+    if(soma4 > maior){
+        maior = soma4;
+        vencedor = "Cavalo 4";
+    }
+
+    if(soma5 > maior){
+        maior = soma5;
+        vencedor = "Cavalo 5";
+    }
+document.querySelector(".opcoesCavalo").style.display = "none";
+
+document.querySelector(".bot").style.display = "none";
+
+document.querySelector(".ListaCavalos p").style.display = "none";
+
+
+msg.style.display = "block";
+
+    msg.innerHTML = `
+
+    <h1>RESULTADO FINAL</h1>
+
+    <hr>
+
+    Cavalo 1: ${soma1.toFixed(1)} metros <br><br>
+
+    Cavalo 2: ${soma2.toFixed(1)} metros <br><br>
+
+    Cavalo 3: ${soma3.toFixed(1)} metros <br><br>
+
+    Cavalo 4: ${soma4.toFixed(1)} metros <br><br>
+
+    Cavalo 5: ${soma5.toFixed(1)} metros <br><br>
+
+    <hr>
+    ` ;
+    if(vencedor == poneiEscolhido){
+
+    msg.innerHTML += `
+    
+    <h2> ${vencedor} venceu!</h2>
+
+    <p>Parabéns! Você ganhou a aposta 🎉</p>
+    <button onclick="voltar()" class="voltar">Voltar</button>
+    
+    `;
+
+} else {
+
+    msg.innerHTML += `
+    
+    <h2> ${vencedor} venceu!</h2>
+
+    <p>Que pena, você perdeu!</p>
+    <button onclick="voltar()" class="voltar">Voltar</button>
+    
+    `;
 }
+}
+function voltar(){
 
+    location.reload();
 
+}
 
 </script>
