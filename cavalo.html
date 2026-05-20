@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+<div class="banner">
 <div class="ListaCavalos">
 
     <h1>Turfe Amigo</h1>  
@@ -21,19 +21,20 @@
 
         <img src="./Imagens/pony1.png" onclick="selecionarFoto(this)">
         <img src="./Imagens/pony2.png" onclick="selecionarFoto(this)">
-        <img src="./Imagens/pony3.jpg" onclick="selecionarFoto(this)">
-        <img src="./Imagens/pony4.png" onclick="selecionarFoto(this)">
+        <img src="./Imagens/pony3.png" onclick="selecionarFoto(this)">
+        <img src="./Imagens/pony6.png" onclick="selecionarFoto(this)">
         <img src="./Imagens/pony5.png" onclick="selecionarFoto(this)">
- 
-
     </div>
-
-    <button id="apostar" onclick="apostar">Apostar</button>
-
+ <div class="bot">
+    <button id="apostar" class="button" onclick="apostar()">Apostar</button>
+ </div>
 </div>
+</div>
+<div id="msg"></div>
 </body>
-
+</html>
 <script>
+
 
 function selecionarFoto(imgEscolhida){
 
@@ -48,6 +49,44 @@ function selecionarFoto(imgEscolhida){
     imgEscolhida.classList.add("selecionado");
 }
 
-</script>
+    let vt_cavalo1 = [];
+    let vt_cavalo2 = [];
+    let vt_cavalo3 = [];
+    let vt_cavalo4 = [];
+    let vt_cavalo5 = [];
 
-</html>
+function apostar(){
+
+    let cavalo1 = (Math.random() * (9 - 7) + 7).toFixed(1);
+    let cavalo2 = (Math.random() * (9 - 7) + 7).toFixed(1);
+    let cavalo3 = (Math.random() * (9 - 7) + 7).toFixed(1);
+    let cavalo4 = (Math.random() * (9 - 7) + 7).toFixed(1);
+    let cavalo5 = (Math.random() * (9 - 7) + 7).toFixed(1);
+
+    vt_cavalo1.push(cavalo1);
+    vt_cavalo2.push(cavalo2);
+    vt_cavalo3.push(cavalo3);
+    vt_cavalo4.push(cavalo4);
+    vt_cavalo5.push(cavalo5);
+
+    if (vt_cavalo1.length < 7){
+
+        for (let i = 0; i < vt_cavalo1.length; i++){
+
+            let soma = 0;
+
+            soma += vt_cavalo1[i];
+
+        }
+
+        msg.innerHTML += `Cavalo 1: ${cavalo1} - ${soma}`;
+
+    } else {
+        alert('São no máximo 7 voltas');
+
+    }
+}
+
+
+
+</script>
