@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Turfe Amigo</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="ListaCavalos">
+
+    <h1>Turfe Amigo</h1>  
+
+    <p>Aposte em uma Little Pony</p>
+
+    <div class="opcoesCavalo">
+
+        <img src="./Imagens/pony1.png" onclick="selecionarFoto(this)">
+        <img src="./Imagens/pony2.png" onclick="selecionarFoto(this)">
+        <img src="./Imagens/pony3.jpg" onclick="selecionarFoto(this)">
+        <img src="./Imagens/pony4.png" onclick="selecionarFoto(this)">
+        <img src="./Imagens/pony5.png" onclick="selecionarFoto(this)">
+ 
+
+    </div>
+
+    <button id="apostar" onclick="apostar">Apostar</button>
+
+</div>
+</body>
+
+<script>
+
+function selecionarFoto(imgEscolhida){
+
+    // remove seleção de todas
+    let fotos = document.querySelectorAll(".opcoesCavalo img");
+
+    fotos.forEach(foto => {
+        foto.classList.remove("selecionado");
+    });
+
+    // adiciona na clicada
+    imgEscolhida.classList.add("selecionado");
+}
+
+</script>
+
+</html>
