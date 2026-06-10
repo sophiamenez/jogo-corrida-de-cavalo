@@ -52,8 +52,16 @@
 
             </div>
 
+            <div class="campo-voltas">
+                <label for="inputVoltas">
+                    Quantidade de voltas (5 a 10):
+                </label>
+
+                <input type="number" id="inputVoltas" min="5" max="10" placeholder="Digite entre 5 e 10">
+            </div>
+
             <div class="hero-botoes-cadastrar">
-                <button onclick="btCadastar()" class="btCadastrar">
+                <button onclick="btCadastrar()" class="btCadastrar">
                     Cadastrar!
                 </button>
             </div>
@@ -125,5 +133,56 @@
         }
     }
 
+    function btCadastrar() {
+
+    let inputs = document.querySelectorAll("#inputsCavalos input");
+    let nomesCavalos = [];
+
+    for (let i = 0; i < inputs.length; i++) {
+
+        let nome = inputs[i].value.trim();
+
+        if (nome.length < 3) {
+            alert(`O nome do cavalo ${i + 1} deve ter pelo menos 3 letras.`);
+            return;
+        }
+
+        nomesCavalos.push(nome);
+    }
+
+    let voltas = Number(document.getElementById("inputVoltas").value);
+
+    if (isNaN(voltas)) {
+        alert("Informe a quantidade de voltas.");
+        return;
+    }
+
+    if (voltas < 5 || voltas > 10) {
+        alert("A corrida deve ter entre 5 e 10 voltas.");
+        return;
+    }
+
+    console.log("Cavalos:", nomesCavalos);
+    console.log("Voltas:", voltas);
+
+    alert(
+        `Cadastro realizado!\n\n` +
+        `Cavalos: ${nomesCavalos.length}\n` +
+        `Voltas: ${voltas}`
+    );
+
+    // guardar para usar na corrida
+    localStorage.setItem(
+        "nomesCavalos",
+        JSON.stringify(nomesCavalos)
+    );
+
+    localStorage.setItem(
+        "quantidadeVoltas",
+        voltas
+    );
+
+    // window.location.href = "corrida.html";
+}
 
 </script>
