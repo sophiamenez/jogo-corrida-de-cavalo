@@ -1,0 +1,46 @@
+.imagem-tela-inicial {
+    background-image:linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url(imagens/imagem\ tela\ inicial.jpg);
+    height: 120vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding-left: 100px;
+}
+
+.hero-texto {
+    font-family: 'Fredoka', sans-serif;
+    max-width: 700px;
+}
+
+.hero-texto h1 {
+    font-size: 90px;
+    color: white;
+    text-shadow: 4px 4px 0 #6f2dbd, 8px 8px 15px rgba(0,0,0,.4);
+    margin-bottom: 15px;
+}
+
+.hero-texto h2 {
+    font-size: 32px;
+    color: white;
+    max-width: 500px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,.6);
+    margin-bottom: 40px;
+}
+
+.btJogar {
+    display: inline-block;
+    padding: 18px 50px;
+    background: #ff4fa3;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 8px 0 #c92d79;
+    transition: .2s;
+}
+
+.btJogar:hover {
+    transform: translateY(-3px);
+}

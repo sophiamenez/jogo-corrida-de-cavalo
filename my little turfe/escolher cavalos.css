@@ -1,0 +1,105 @@
+body{
+    margin: 0;
+}
+
+.imagem-escolher-cavalos{
+    height: 100vh;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+}
+
+.texto-escolher-cavalos{
+    font-family: 'Fredoka', sans-serif;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-align: center;
+    max-width: 1000px;
+}
+
+.texto-escolher-cavalos h1 {
+    margin-top: 5px;
+    font-size: 55px;
+    color: white;
+    font-weight: 700;
+
+    text-shadow:
+         0 3px 8px #ff4fa3;
+
+    margin-bottom: 10px;
+}
+
+.texto-escolher-cavalos h2 {
+    font-size: 28px;
+    color: rgba(255,255,255,0.95);
+
+    text-shadow:
+        0 3px 8px #ff4fa3;
+
+    margin-bottom: 10px;
+}
+
+.texto-escolher-cavalos h3 {
+    font-size: 22px;
+    color: white;
+    text-shadow: 0 3px 8px #ff4fa3;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.btApostar{
+    padding: 15px 30px;
+    background: #ff4fa3;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 50px;
+    box-shadow: 0 8px 0 #c92d79;
+    transition: .2s;
+}
+
+.btApostar:hover{
+    transform: translateY(-3px);
+}
+
+.escolher-cavalos{
+    background-image: url("imagens/plano de fundo escolher cavalos.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.opcoesCavalo{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin-top:40px;
+}
+
+.opcoesCavalo img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:50%;
+    cursor:pointer;
+    border:4px solid black;
+    transition:0.3s;
+}
+
+.opcoesCavalo img:hover{
+    transform:scale(1.08);
+}
+
+.opcoesCavalo img.selecionado{
+    border:4px solid #00eaff;
+    transform:scale(1.1);
+}
