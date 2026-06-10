@@ -1,65 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Escolher cavalos</title>
-<link rel="stylesheet" href="escolher cavalos.css">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolher Cavalos</title>
+
+    <link rel="stylesheet" href="escolher cavalos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<div class="escolher-cavalos">
-<div class="texto-escolher-cavalos">
-<h1>Agora é a hora de escolher quais cavalos você quer apostar!</h1>
-<h2>Clique em quais você tem interesse</h2>
-<h3>Escolha de 2 a 6 cavalinhos</h3>
-<div class="opcoesCavalo">
 
-<img src="./Imagens/pony1.png" onclick="selecionarFoto(this, 'Cavalo 1')">
+    <!-- TELA 1 - ESCOLHA DOS CAVALOS -->
+    <div id="tela1" class="escolher-cavalos">
 
-<img src="./Imagens/pony2.png" onclick="selecionarFoto(this, 'Cavalo 2')">
+        <div class="texto-escolher-cavalos">
 
-<img src="./Imagens/pony3.png" onclick="selecionarFoto(this, 'Cavalo 3')">
+            <h1>Agora é a hora de escolher quais cavalos você quer apostar!</h1>
 
-<img src="./Imagens/pony6.png" onclick="selecionarFoto(this, 'Cavalo 4')">
+            <h2>Clique nos cavalos que você tem interesse</h2>
 
-<img src="./Imagens/pony5.png" onclick="selecionarFoto(this, 'Cavalo 5')">
+            <h3>Escolha de 2 a 6 cavalinhos</h3>
 
-<img src="./Imagens/poney7.png" onclick="selecionarFoto(this, 'Cavalo 6')">
-</div>
+            <div class="opcoesCavalo">
 
-<div class="hero-botoes">
-<button onclick="irParaAposta()" class="btApostar">
-Ir para a aposta!
-</button>
-</div>
+                <img src="./Imagens/pony1.png" alt="Cavalo 1"
+                    onclick="selecionarFoto(this, 'Cavalo 1')">
 
+                <img src="./Imagens/pony2.png" alt="Cavalo 2"
+                    onclick="selecionarFoto(this, 'Cavalo 2')">
 
-<div id="tela2" style="display: none;">
+                <img src="./Imagens/pony3.png" alt="Cavalo 3"
+                    onclick="selecionarFoto(this, 'Cavalo 3')">
 
-<div id="nomeCavalo"></div>
+                <img src="./Imagens/pony6.png" alt="Cavalo 4"
+                    onclick="selecionarFoto(this, 'Cavalo 4')">
 
-Digite a quatidade de rodadas:
-<input id="iptQnteRodadas">
+                <img src="./Imagens/pony5.png" alt="Cavalo 5"
+                    onclick="selecionarFoto(this, 'Cavalo 5')">
 
-<div>
-<button onclick="definir()">Definir Rodadas</button>
-<button onclick="jogar()">Comecar o jogo!</button>
-</div>
+                <img src="./Imagens/poney7.png" alt="Cavalo 6"
+                    onclick="selecionarFoto(this, 'Cavalo 6')">
 
-</div>
+            </div>
 
-<!-- TELA RESULTADO -->
-<div id="apostas" style="display: none;">
-<div id="resultado"></div>
-<div id="podium"></div>
-</div>
-</div>
+            <div class="hero-botoes">
+                <button onclick="irParaAposta()" class="btApostar">
+                    Ir para a aposta!
+                </button>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
+
+    <!-- TELA 2 - CONFIGURAÇÃO DA CORRIDA -->
+    <div id="tela2" style="display: none;">
+
+        <div class="escolher-cavalos">
+
+            <div class="texto-escolher-cavalos">
+
+                <h1 id="tituloNomear">
+                    Configuração da Corrida
+                </h1>
+
+                <div id="inputsCavalos"></div>
+
+                <div class="campo-voltas">
+
+                    <label for="inputVoltas">
+                        Quantidade de voltas (5 a 10):
+                    </label>
+
+                    <input
+                        type="number"
+                        id="inputVoltas"
+                        min="5"
+                        max="10"
+                        placeholder="Digite entre 5 e 10">
+
+                </div>
+
+                <div class="hero-botoes-cadastrar">
+
+                    <button onclick="jogar()" class="btCadastrar">
+                        INICIAR CORRIDA
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TELA 3 - RESULTADOS -->
+    <div id="apostas" style="display: none;">
+
+        <div id="resultado"></div>
+
+        <div id="podium"></div>
+
+    </div>
+
 </body>
 
 </html>
@@ -95,84 +140,66 @@ console.log(cavalosSelecionados);
 
 function irParaAposta() {
 
-if (cavalosSelecionados.length < 2) {
-alert("Escolha pelo menos 2 cavalinhos!");
-return;
-}
+    if (cavalosSelecionados.length < 2) {
+        alert("Escolha pelo menos 2 cavalinhos!");
+        return;
+    }
 
-localStorage.setItem(
-"cavalosSelecionados",
-JSON.stringify(cavalosSelecionados)
-);
+    localStorage.setItem(
+        "cavalosSelecionados",
+        JSON.stringify(cavalosSelecionados)
+    );
 
-// Esconde a seleção dos cavalos
-document.querySelector(".opcoesCavalo").style.display = "none";
+    // Esconde a primeira tela
+    document.getElementById("tela1").style.display = "none";
 
-// Opcional: esconder o botão também
-document.querySelector(".btApostar").style.display = "none";
-
-// Mostra a tela de aposta
-document.getElementById("tela2").style.display = "block";
-
+    // Mostra a segunda tela
+    document.getElementById("tela2").style.display = "block";
 }
 
 
 function jogar() {
 
-let cavalos = JSON.parse(localStorage.getItem("cavalosSelecionados"));
+    let cavalos = JSON.parse(
+        localStorage.getItem("cavalosSelecionados")
+    );
 
-let rodadas = Number(document.getElementById("iptQnteRodadas").value);
+    let rodadas = Number(document.getElementById("inputVoltas").value); 
 
-// guarda a quantidade de rodadas
-localStorage.setItem("quantidadeRodadas", rodadas);
+    if (rodadas < 5 || rodadas > 10) {
+        alert("Digite entre 5 e 10 voltas!");
+        return;
+    }
 
-if (!rodadas || rodadas <= 0) {
-alert("Digite um número válido de rodadas!");
-return;
-}
+    document.getElementById("tela2").style.display = "none";
+        document.getElementById("tela1").style.display = "none";
+    document.getElementById("apostas").style.display = "block";
 
-// SOME COM A TELA DE APOSTA
-document.getElementById("tela2").style.display = "none";
+    let resultado_corrida = [];
 
-// CRIA UMA NOVA TELA DE RESULTADO
-document.getElementById("apostas").style.display = "block";
+    let estados = cavalos.map(nome => ({
+        nome: nome,
+        total: 0,
+        voltas: []
+    }));
 
+    for (let i = 1; i <= rodadas; i++) {
 
-// estrutura principal
-let resultado_corrida = [];
+        estados.forEach(cavalo => {
 
-// inicializa cavalos
-let estados = cavalos.map(nome => {
-return {
-nome: nome,
-total: 0,
-voltas: []
-};
-});
+            let ganho = Math.random() * 10;
 
-// corrida
-for (let i = 1; i <= rodadas; i++) {
+            cavalo.total += ganho;
+            cavalo.voltas.push(ganho);
 
-estados.forEach(cavalo => {
+        });
 
-let ganho = Math.random() * 10;
+    }
 
-cavalo.total += ganho;
+    resultado_corrida = estados;
 
-cavalo.voltas.push(ganho);
-
-});
-
-}
-
-resultado_corrida = estados;
-
-console.log("RESULTADO COMPLETO:", resultado_corrida);
-
-mostrarResultados(resultado_corrida);
-
-mostrarPodium(resultado_corrida);
-
+    mostrarResultados(resultado_corrida);
+    mostrarPodium(resultado_corrida);
 }
 
 function mostrarResultados(resultado) {

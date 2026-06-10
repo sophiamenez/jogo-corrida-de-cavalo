@@ -36,6 +36,7 @@
                     <button onclick="irParaAposta()" class="btApostar">
                         Escolher Cavalos!
                     </button>
+              
                 </div>
             </div>
         </div>
@@ -64,6 +65,10 @@
                 <button onclick="btCadastrar()" class="btCadastrar">
                     Cadastrar!
                 </button>
+
+                <button onclick="iniciarCorrida()" class="btCadastrar">
+                    INICIAR CORRIDA
+                </button>
             </div>
         </div>
     </div>
@@ -71,8 +76,6 @@
 
 
 </body>
-
-
 </html>
 <script>
 
@@ -182,7 +185,39 @@
         voltas
     );
 
-    // window.location.href = "corrida.html";
+
+}
+
+function iniciarCorrida() {
+
+    let inputs = document.querySelectorAll("#inputsCavalos input");
+    let nomesCavalos = [];
+
+    for (let i = 0; i < inputs.length; i++) {
+
+        let nome = inputs[i].value.trim();
+
+        nomesCavalos.push(nome);
+    }
+
+    let voltas = Number(document.getElementById("inputVoltas").value);
+
+    if (voltas < 5 || voltas > 10) {
+        alert("A corrida deve ter entre 5 e 10 voltas.");
+        return;
+    }
+
+    localStorage.setItem(
+        "nomesCavalos",
+        JSON.stringify(nomesCavalos)
+    );
+
+    localStorage.setItem(
+        "quantidadeVoltas",
+        voltas
+    );
+
+    window.location.href = "aposta.html";
 }
 
 </script>
