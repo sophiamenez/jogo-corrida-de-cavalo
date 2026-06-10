@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escolher cavalos</title>
+<link rel="stylesheet" href="escolher cavalos.css">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="escolher-cavalos">
+<div class="texto-escolher-cavalos">
+<h1>Agora é a hora de escolher quais cavalos você quer apostar!</h1>
+<h2>Clique em quais você tem interesse</h2>
+<h3>Escolha de 2 a 6 cavalinhos</h3>
+<div class="opcoesCavalo">
+
+<img src="./Imagens/pony1.png" onclick="selecionarFoto(this, 'Cavalo 1')">
+
+<img src="./Imagens/pony2.png" onclick="selecionarFoto(this, 'Cavalo 2')">
+
+<img src="./Imagens/pony3.png" onclick="selecionarFoto(this, 'Cavalo 3')">
+
+<img src="./Imagens/pony6.png" onclick="selecionarFoto(this, 'Cavalo 4')">
+
+<img src="./Imagens/pony5.png" onclick="selecionarFoto(this, 'Cavalo 5')">
+
+<img src="./Imagens/poney7.png" onclick="selecionarFoto(this, 'Cavalo 6')">
+</div>
+
+<div class="hero-botoes">
+<button onclick="irParaAposta()" class="btApostar">
+Ir para a aposta!
+</button>
+</div>
+
+
+<div id="tela2" style="display: none;">
+
+<div id="nomeCavalo"></div>
+
+Digite a quatidade de rodadas:
+<input id="iptQnteRodadas">
+
+<div>
+<button onclick="definir()">Definir Rodadas</button>
+<button onclick="jogar()">Comecar o jogo!</button>
+</div>
+
+</div>
+
+<!-- TELA RESULTADO -->
+<div id="apostas" style="display: none;">
+<div id="resultado"></div>
+<div id="podium"></div>
+</div>
+</div>
+
+</div>
+</div>
+</body>
+
+</html>
+<script>
+
+let cavalosSelecionados = [];
+
+function selecionarFoto(imgEscolhida, cavalo) {
+
+if (imgEscolhida.classList.contains("selecionado")) {
+
+imgEscolhida.classList.remove("selecionado");
+
+cavalosSelecionados =
+cavalosSelecionados.filter(
+item => item !== cavalo
+);
+
+} else {
+
+if (cavalosSelecionados.length >= 6) {
+alert("Você pode selecionar no máximo 6 cavalinhos!");
+return;
+}
+
+imgEscolhida.classList.add("selecionado");
+
+cavalosSelecionados.push(cavalo);
+}
+
+console.log(cavalosSelecionados);
+}
+
+function irParaAposta() {
+
+if (cavalosSelecionados.length < 2) {
+alert("Escolha pelo menos 2 cavalinhos!");
+return;
+}
+
+localStorage.setItem(
+"cavalosSelecionados",
+JSON.stringify(cavalosSelecionados)
+);
+
+// Esconde a seleção dos cavalos
+document.querySelector(".opcoesCavalo").style.display = "none";
+
+// Opcional: esconder o botão também
+document.querySelector(".btApostar").style.display = "none";
+
+// Mostra a tela de aposta
+document.getElementById("tela2").style.display = "block";
+
+}
+
+
+function jogar() {
+
+let cavalos = JSON.parse(localStorage.getItem("cavalosSelecionados"));
+
+let rodadas = Number(document.getElementById("iptQnteRodadas").value);
+
+// guarda a quantidade de rodadas
+localStorage.setItem("quantidadeRodadas", rodadas);
+
+if (!rodadas || rodadas <= 0) {
+alert("Digite um número válido de rodadas!");
+return;
+}
+
+// SOME COM A TELA DE APOSTA
+document.getElementById("tela2").style.display = "none";
+
+// CRIA UMA NOVA TELA DE RESULTADO
+document.getElementById("apostas").style.display = "block";
+
+
+// estrutura principal
+let resultado_corrida = [];
+
+// inicializa cavalos
+let estados = cavalos.map(nome => {
+return {
+nome: nome,
+total: 0,
+voltas: []
+};
+});
+
+// corrida
+for (let i = 1; i <= rodadas; i++) {
+
+estados.forEach(cavalo => {
+
+let ganho = Math.random() * 10;
+
+cavalo.total += ganho;
+
+cavalo.voltas.push(ganho);
+
+});
+
+}
+
+resultado_corrida = estados;
+
+console.log("RESULTADO COMPLETO:", resultado_corrida);
+
+mostrarResultados(resultado_corrida);
+
+mostrarPodium(resultado_corrida);
+
+}
+
+function mostrarResultados(resultado) {
+let texto = "RESULTADO POR VOLTA:\n\n";
+
+resultado.forEach(cavalo => {
+texto += `${cavalo.nome}:\n`;
+
+cavalo.voltas.forEach((v, i) => {
+texto += `Volta ${i + 1}: ${v.toFixed(2)}\n`;
+});
+
+texto += `TOTAL: ${cavalo.total.toFixed(2)}\n\n`;
+});
+
+document.getElementById("resultado").innerText = texto;
+}
+
+function mostrarPodium(resultado) {
+
+// ordena por total (maior primeiro)
+let ordenado = [...resultado].sort((a, b) => b.total - a.total);
+
+let podium = [];
+let posicao = 1;
+
+for (let i = 0; i < ordenado.length; i++) {
+
+if (i === 0) {
+podium.push({ pos: posicao, cavalos: [ordenado[i]] });
+} else {
+
+let anterior = ordenado[i - 1];
+
+if (Math.abs(ordenado[i].total - anterior.total) < 0.0001) {
+// empate → mesmo lugar
+podium[podium.length - 1].cavalos.push(ordenado[i]);
+} else {
+posicao++;
+if (posicao > 3) break;
+podium.push({ pos: posicao, cavalos: [ordenado[i]] });
+}
+}
+}
+
+// monta HTML
+let html = "<h2>🏁 Pódio Final</h2>";
+
+podium.forEach(p => {
+
+let nomes = p.cavalos.map(c => c.nome).join(", ");
+
+html += `
+<p>
+<b>${p.pos}º lugar:</b> ${nomes}
+</p>
+`;
+});
+
+document.getElementById("podium").innerHTML = html;
+}
+
+
+
+
+
+</script>
