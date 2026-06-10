@@ -41,12 +41,18 @@ Ir para a aposta!
 
 <div id="nomeCavalo"></div>
 
-Digite a quatidade de rodadas: <input id="iptQnteRodadas">
+Digite a quatidade de rodadas:
+<input id="iptQnteRodadas">
 
 <div>
+<button onclick="definir()">Definir Rodadas</button>
 <button onclick="jogar()">Comecar o jogo!</button>
 </div>
-<div id="apostas">
+
+</div>
+
+<!-- TELA RESULTADO -->
+<div id="apostas" style="display: none;">
 <div id="resultado"></div>
 <div id="podium"></div>
 </div>
@@ -110,15 +116,27 @@ document.getElementById("tela2").style.display = "block";
 
 }
 
+
 function jogar() {
+
 let cavalos = JSON.parse(localStorage.getItem("cavalosSelecionados"));
 
 let rodadas = Number(document.getElementById("iptQnteRodadas").value);
+
+// guarda a quantidade de rodadas
+localStorage.setItem("quantidadeRodadas", rodadas);
 
 if (!rodadas || rodadas <= 0) {
 alert("Digite um número válido de rodadas!");
 return;
 }
+
+// SOME COM A TELA DE APOSTA
+document.getElementById("tela2").style.display = "none";
+
+// CRIA UMA NOVA TELA DE RESULTADO
+document.getElementById("apostas").style.display = "block";
+
 
 // estrutura principal
 let resultado_corrida = [];
@@ -136,10 +154,15 @@ voltas: []
 for (let i = 1; i <= rodadas; i++) {
 
 estados.forEach(cavalo => {
-let ganho = Math.random() * 10; // valor da volta
+
+let ganho = Math.random() * 10;
+
 cavalo.total += ganho;
+
 cavalo.voltas.push(ganho);
+
 });
+
 }
 
 resultado_corrida = estados;
@@ -147,8 +170,8 @@ resultado_corrida = estados;
 console.log("RESULTADO COMPLETO:", resultado_corrida);
 
 mostrarResultados(resultado_corrida);
-mostrarPodium(resultado_corrida);
 
+mostrarPodium(resultado_corrida);
 
 }
 
