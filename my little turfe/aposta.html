@@ -73,13 +73,7 @@
                         Quantidade de voltas (5 a 10):
                     </label>
 
-                    <input
-                        type="number"
-                        id="inputVoltas"
-                        min="5"
-                        max="10"
-                        placeholder="Digite entre 5 e 10">
-
+                    <input type="number" id="inputVoltas" placeholder="Digite entre 5 e 10">
                 </div>
 
                 <div class="hero-botoes-cadastrar">
@@ -87,9 +81,7 @@
                     <button onclick="jogar()" class="btCadastrar">
                         INICIAR CORRIDA
                     </button>
-
                 </div>
-
             </div>
 
         </div>
@@ -101,61 +93,60 @@
 
         <div id="pista">
             <div class="meta"></div>
-
         </div>
 
         <div id="resultado"></div>
-
         <div id="podium"></div>
-
     </div>
-
+<div id="msg"></div>
 </body>
 
 </html>
 <script>
 
-let cavalosSelecionados = [];
+    let cavalosSelecionados = [];
 
-function selecionarFoto(imgEscolhida, cavalo) {
 
-if (imgEscolhida.classList.contains("selecionado")) {
+    function selecionarFoto(imgEscolhida, cavalo) {
 
-imgEscolhida.classList.remove("selecionado");
+        if (imgEscolhida.classList.contains("selecionado")) {
 
-cavalosSelecionados =
-cavalosSelecionados.filter(
-item => item !== cavalo
-);
+        imgEscolhida.classList.remove("selecionado");
 
-} else {
+        cavalosSelecionados =
+        cavalosSelecionados.filter(
+        item => item !== cavalo
+        );
 
-if (cavalosSelecionados.length >= 6) {
-alert("Você pode selecionar no máximo 6 cavalinhos!");
-return;
 }
+        else {
 
-imgEscolhida.classList.add("selecionado");
+        if (cavalosSelecionados.length >= 6) {
+        alert("Você pode selecionar no máximo 6 cavalinhos!");
+        return;
+        }
 
-cavalosSelecionados.push(cavalo);
-}
+        imgEscolhida.classList.add("selecionado");
 
-console.log(cavalosSelecionados);
-}
+        cavalosSelecionados.push(cavalo);
+        }
 
-function irParaAposta() {
+        console.log(cavalosSelecionados);
+     }
+
+    function irParaAposta() {
 
     
 
-    if (cavalosSelecionados.length < 2) {
-        alert("Escolha pelo menos 2 cavalinhos!");
-        return;
-    }
+        if (cavalosSelecionados.length < 2) {
+            alert("Escolha pelo menos 2 cavalinhos!");
+            return;
+        }
 
-    localStorage.setItem(
-        "cavalosSelecionados",
-        JSON.stringify(cavalosSelecionados)
-    );
+        localStorage.setItem(
+            "cavalosSelecionados",
+            JSON.stringify(cavalosSelecionados)
+        );
 
     // Esconde a primeira tela
     document.getElementById("tela1").style.display = "none";
@@ -164,7 +155,7 @@ function irParaAposta() {
     document.getElementById("tela2").style.display = "block";
 }
 
-const gifs = {
+var gifs = {
     "Cavalo 1": "./Imagens/poneyamarela.gif",
     "Cavalo 2": "./Imagens/ponei roxa.gif",
     "Cavalo 3": "./Imagens/poneycolorida.gif",
@@ -200,20 +191,17 @@ function jogar() {
 
 let pista = document.getElementById("pista");
 pista.innerHTML = "";
+
 pista.innerHTML = '<div class="meta"></div>';
 
 for(let i = 0; i < estados.length; i++){
-
     let faixa = document.createElement("div");
 
     faixa.className = "faixa";
     faixa.style.top = `${i * 100}px`;
 
-    pista.appendChild(faixa);
+    pista.appendChild(faixa); // coloca o cavalo dentro da pista 
 }
-
-
-    
 
 estados.forEach((cavalo, index) => {
 
@@ -222,8 +210,7 @@ estados.forEach((cavalo, index) => {
     img.src = gifs[cavalo.nome];
     img.className = "cavaloCorrida";
 
-        img.style.top = `${index * 100 + 10}px`;
-
+    img.style.top = `${index * 100 + 10}px`;
     img.id = `cavalo${index}`;
 
     pista.appendChild(img);
@@ -232,14 +219,12 @@ estados.forEach((cavalo, index) => {
 });
 
     let voltaAtual = 0;
-
    let corrida = setInterval(() => {
-
     voltaAtual++;
 
     estados.forEach(cavalo => {
 
-    const META = 1220;
+    var META = 1220;
 
         let ganho =
 (META / rodadas) *
@@ -311,21 +296,17 @@ podium.push({ pos: posicao, cavalos: [ordenado[i]] });
 }
 }
 
-// monta HTML
-let html = "<h2>🏁 Pódio Final</h2>";
+
+
+ msg.innerHTML = "<h2>🏁 Pódio Final</h2>";
 
 podium.forEach(p => {
 
 let nomes = p.cavalos.map(c => c.nome).join(", ");
 
-html += `
-<p>
-<b>${p.pos}º lugar:</b> ${nomes}
-</p>
-`;
+msg.innerHTML += `<p><b>${p.pos}º lugar:</b> ${nomes}</p>`;
 });
-
-document.getElementById("podium").innerHTML = html;
+document.getElementById("podium").innerHTML; 
 }
 
 
