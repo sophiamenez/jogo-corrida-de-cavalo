@@ -161,7 +161,7 @@ body{
     height:800px;
     position:relative;
     overflow:hidden;
-    background-image: url("imagens/campo.png");;
+    background-image: url("imagens/campo.png");
     border:6px solid #3e2723;
 }
 .meta{
