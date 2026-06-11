@@ -4,7 +4,6 @@ body{
 
 .imagem-escolher-cavalos{
     height: 100vh;
-
     display: flex;
     justify-content: center; 
     align-items: center;    
@@ -24,20 +23,14 @@ body{
     font-size: 55px;
     color: white;
     font-weight: 700;
-
-    text-shadow:
-         0 3px 8px #ff4fa3;
-
+    text-shadow: 0 3px 8px #ff4fa3;
     margin-bottom: 10px;
 }
 
 .texto-escolher-cavalos h2 {
     font-size: 28px;
     color: rgba(255,255,255,0.95);
-
-    text-shadow:
-        0 3px 8px #ff4fa3;
-
+    text-shadow:0 3px 8px #ff4fa3;
     margin-bottom: 10px;
 }
 
@@ -151,13 +144,10 @@ body{
 .campo-voltas input {
     width: 180px;
     height: 45px;
-
     border: 3px solid #8B5E3C;
     border-radius: 12px;
-
     font-size: 18px;
     text-align: center;
-
     font-family: 'Fredoka', sans-serif;
 }
 
@@ -171,34 +161,22 @@ body{
     height:800px;
     position:relative;
     overflow:hidden;
-
-    background-image: url("imagens/campo.png");
-    ;
-
+    background-image: url("imagens/campo.png");;
     border:6px solid #3e2723;
 }
 .meta{
     position:absolute;
     right:80px;
     top:0;
-
     width:20px;
     height:100%;        
-
     background:
-    repeating-linear-gradient(
-        45deg,
-        white 0px,
-        white 20px,
-        black 20px,
-        black 40px
-    );
+    repeating-linear-gradient(45deg, white 0px, white 20px, black 20px, black 40px);
 }
 .faixa{
     position:absolute;
     width:100%;
     height:100px;
-
     border-bottom:4px dashed white;
 }
 
@@ -207,4 +185,65 @@ body{
     width: 100px;
     left: 0;
     transition: left 0.5s linear;
+}
+
+#telaResultado{
+    background-image: url("imagens/plano de fundo escolher cavalos.png");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.resultado-container{
+    background: rgba(255,255,255,0.9);
+    width: 80%;
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.resultado-container h1{
+    color: #ff4fa3;
+    font-size: 50px;
+    margin-bottom: 30px;
+    text-shadow: 0 3px 8px rgba(255,79,163,0.4);
+}
+
+#podium{
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+#podium h2{
+    font-size: 35px;
+    color: #ff4fa3;
+    margin-bottom: 25px;
+}
+
+#podium p{
+    font-size: 24px;
+    margin: 15px auto;
+    font-weight: bold;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+#resultado{
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin: 20px auto;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 18px;
+    max-width: 700px;
+    text-align: center;
 }
