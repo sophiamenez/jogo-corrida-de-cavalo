@@ -99,6 +99,11 @@
     <!-- TELA 3 - RESULTADOS -->
     <div id="apostas" style="display: none;">
 
+        <div id="pista">
+            <div class="meta"></div>
+
+        </div>
+
         <div id="resultado"></div>
 
         <div id="podium"></div>
@@ -140,6 +145,8 @@ console.log(cavalosSelecionados);
 
 function irParaAposta() {
 
+    
+
     if (cavalosSelecionados.length < 2) {
         alert("Escolha pelo menos 2 cavalinhos!");
         return;
@@ -156,6 +163,15 @@ function irParaAposta() {
     // Mostra a segunda tela
     document.getElementById("tela2").style.display = "block";
 }
+
+const gifs = {
+    "Cavalo 1": "./Imagens/poneyamarela.gif",
+    "Cavalo 2": "./Imagens/ponei roxa.gif",
+    "Cavalo 3": "./Imagens/poneycolorida.gif",
+    "Cavalo 4": "./Imagens/poneyrosa.gif",
+    "Cavalo 5": "./Imagens/poneycaipira.gif",
+    "Cavalo 6": "./Imagens/poneybranca.gif"
+};
 
 
 function jogar() {
@@ -175,32 +191,82 @@ function jogar() {
         document.getElementById("tela1").style.display = "none";
     document.getElementById("apostas").style.display = "block";
 
-    let resultado_corrida = [];
-
     let estados = cavalos.map(nome => ({
-        nome: nome,
-        total: 0,
-        voltas: []
-    }));
+    nome: nome,
+    total: 0,
+    voltas: []
+}));
 
-    for (let i = 1; i <= rodadas; i++) {
 
-        estados.forEach(cavalo => {
+let pista = document.getElementById("pista");
+pista.innerHTML = "";
+pista.innerHTML = '<div class="meta"></div>';
 
-            let ganho = Math.random() * 10;
+for(let i = 0; i < estados.length; i++){
 
-            cavalo.total += ganho;
-            cavalo.voltas.push(ganho);
+    let faixa = document.createElement("div");
 
-        });
+    faixa.className = "faixa";
+    faixa.style.top = `${i * 100}px`;
 
+    pista.appendChild(faixa);
+}
+
+
+    
+
+estados.forEach((cavalo, index) => {
+
+    let img = document.createElement("img");
+
+    img.src = gifs[cavalo.nome];
+    img.className = "cavaloCorrida";
+
+        img.style.top = `${index * 100 + 10}px`;
+
+    img.id = `cavalo${index}`;
+
+    pista.appendChild(img);
+
+    cavalo.elemento = img;
+});
+
+    let voltaAtual = 0;
+
+   let corrida = setInterval(() => {
+
+    voltaAtual++;
+
+    estados.forEach(cavalo => {
+
+    const META = 1220;
+
+        let ganho =
+(META / rodadas) *
+(0.8 + Math.random() * 0.4);
+
+cavalo.total += ganho;
+
+cavalo.voltas.push(ganho);
+
+
+
+        cavalo.elemento.style.left =
+            cavalo.total + "px";
+
+    });
+
+    if (voltaAtual >= rodadas) {
+
+        clearInterval(corrida);
+
+        mostrarResultados(estados);
+        mostrarPodium(estados);
     }
 
-    resultado_corrida = estados;
-
-    mostrarResultados(resultado_corrida);
-    mostrarPodium(resultado_corrida);
+}, 1000);
 }
+
 
 function mostrarResultados(resultado) {
 let texto = "RESULTADO POR VOLTA:\n\n";
